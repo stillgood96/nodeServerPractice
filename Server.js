@@ -19,8 +19,15 @@ app.get('/', (req, res) => {
         console.log("connected !");
     })
 
-
-    
+    /* DB User 조회 */
+    aiGolf.query(
+        "SELECT * FROM USER",
+        function(err, result, fields) {
+            console.log(`에러: ${err}`);
+            console.log(`결과: ${JSON.stringify(result)}`);
+            console.log(`필드: ${JSON.stringify(fields)}`);
+        }
+    )    
 });
 
 app.listen(port, () => {
