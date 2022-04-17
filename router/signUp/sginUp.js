@@ -39,10 +39,11 @@ router.get('/', (req, res) => { // 회원가입
             function(err,  queryResult, fields) {
 
                 if(queryResult.affectedRows > 0) {
-                    console.log(result.success);
                     result.success = true;
-                    console.log(result.success);
+                }else {
+                    console.log(err);
                 }
+
                 res.json(result);
             }
         )
@@ -53,6 +54,30 @@ router.get('/', (req, res) => { // 회원가입
     
 });
 
+router.get("/checkId", (req, res) => {
 
+    console.log("아이디 중복체크 시작");
 
+    let id = req.query.id;
+
+    let result = new Object({
+        success: false
+    })
+
+    if(id) {
+        db.connection.query(
+            `SELECT COUNT(user_no) AS count FROM USER WHERE email_id = '${id}';`, 
+            function(err, queryResult, fields){
+
+                if(queryResult[0].count == 0) {
+                    result.success = true
+                }
+
+                res.json(result);
+            }
+        )
+    }else {
+        res.json(result);
+    }
+});
 module.exports = router;
