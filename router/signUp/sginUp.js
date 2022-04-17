@@ -1,13 +1,14 @@
 const express = require('express');
-const { resourceLimits } = require('worker_threads');
 const router = express.Router();
 const db = require("../../mysql/Db");
 
-router.get('/', (req, res) => { // 회원가입 
+router.all('/', (req, res) => { // 회원가입 
     
     console.log("회원가입 시작");
 
     const params = req.query;
+    console.log(req.body); // post로 보내는데 Body를 못가져옴 이유를 못찾겠다 . .ㅠㅠ
+    console.log(params)
 
     let user = new Object({
         id : params.id,
@@ -68,7 +69,7 @@ router.get("/checkId", (req, res) => {
         db.connection.query(
             `SELECT COUNT(user_no) AS count FROM USER WHERE email_id = '${id}';`, 
             function(err, queryResult, fields){
-
+                console.log(queryResult);
                 if(queryResult[0].count == 0) {
                     result.success = true
                 }

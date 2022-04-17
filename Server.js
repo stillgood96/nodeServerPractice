@@ -8,6 +8,9 @@ const login = require('./router/sign/login');
 const signUp = require("./router/signUp/sginUp");
 
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json());
+app.use(express.json())
+
 app.use((_, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
