@@ -1,11 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const aiGolf = require('./mysql/Db');
 
 const app = express();
 const port = 5006;
 
-const index = require('./router/index');
+const login = require('./router/sign/login');
 
 
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -16,8 +15,7 @@ app.use((_, res, next) => {
     next();
 });
 
-
-app.use('/login', index);
+app.use('/login', login);
 
 
 app.listen(port, () => {
