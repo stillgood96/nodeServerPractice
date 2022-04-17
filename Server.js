@@ -5,7 +5,7 @@ const app = express();
 const port = 5006;
 
 const login = require('./router/sign/login');
-
+const signUp = require("./router/signUp/sginUp");
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use((_, res, next) => {
@@ -15,7 +15,8 @@ app.use((_, res, next) => {
     next();
 });
 
-app.use('/login', login);
+app.use('/login', login);  // 로그인
+app.use('/signUp', signUp);// 회원가입 
 
 
 app.listen(port, () => {
